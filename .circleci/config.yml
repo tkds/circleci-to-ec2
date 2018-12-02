@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.5-stretch
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "28:a4:52:94:5f:20:38:71:79:92:57:51:72:77:a0:f8"
+      - run: ssh-keyscan ${AWS_EC2_HOST} >> ~/.ssh/known_hosts
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run: sh deploy.sh
+      - run: echo "Complete!"
