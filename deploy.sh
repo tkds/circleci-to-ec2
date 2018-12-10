@@ -7,7 +7,7 @@ export AWS_DEFAULT_REGION="us-east-1"
 
 MYSECURITYGROUP=${AWS_SECURITY_GROUP}
 EC2_HOST=${AWS_EC2_HOST}
-MYIP=`curl -s ifconfig.me`
+MYIP=`curl checkip.amazonaws.com`
 
 aws ec2 authorize-security-group-ingress --group-id $MYSECURITYGROUP --protocol tcp --port 22 --cidr $MYIP/32
 ssh -o "StrictHostKeyChecking=no" ec2-user@$EC2_HOST sh <<SHELL
